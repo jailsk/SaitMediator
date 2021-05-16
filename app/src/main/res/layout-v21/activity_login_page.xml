@@ -11,6 +11,7 @@
 
     <ImageView
         android:id="@+id/logo_image"
+        android:transitionName="logo_image"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:background="#00FFFFFF"
@@ -22,14 +23,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/montserrat_subrayada"
-        android:text="Welcome to Mediator"
+        android:text="@string/welcome_to_mediator"
+        android:transitionName="text"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
-        android:textSize="25sp"/>
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sign in to continue"
+        android:text="@string/sign_in_to_continue"
         android:textSize="15sp"/>
     <LinearLayout
         android:layout_width="match_parent"
@@ -41,7 +45,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/rollno"
-            android:hint="Roll Number"
+            android:hint="@string/roll_number"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp">
@@ -55,7 +59,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/password"
-            android:hint="Password"
+            android:hint="@string/password"
             app:passwordToggleEnabled="true"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_marginTop="5dp"
@@ -70,8 +74,8 @@
         <Button
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:text="forgot password"
-            android:layout_gravity="right"
+            android:text="@string/forgot_password"
+            android:layout_gravity="end"
             android:background="#00000000"
             android:textColor="@color/black"
             android:layout_marginTop="5dp"/>
@@ -79,7 +83,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/black"
-            android:text="Login"
+            android:text="@string/login"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
             />
@@ -87,10 +91,10 @@
             android:id="@+id/registerbtn2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="New user? sign up"
+            android:text="@string/new_user_sign_up"
             android:background="#00000000"
             android:textColor="@color/black"
-            android:layout_gravity="right"
+            android:layout_gravity="end"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"/>
     </LinearLayout>

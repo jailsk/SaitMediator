@@ -1,42 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
+    tools:context=".register_page"
     android:orientation="vertical"
-    tools:context=".login_page"
-    android:padding="30dp">
-
+    android:padding="20dp">
     <ImageView
-        android:id="@+id/logo_image"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:background="#00FFFFFF"
         android:src="@mipmap/ic_launcher"
         android:contentDescription="@string/splash_logo"/>
-
     <TextView
-        android:id="@+id/login_text"
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/montserrat_subrayada"
-        android:text="Welcome to Mediator"
         android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
-        android:textSize="25sp"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Sign in to continue"
-        android:textSize="15sp"/>
+        android:text="New user? signup here."
+        android:textColor="@color/black"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:fontFamily="@font/montserrat_subrayada"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
-        android:orientation="vertical">
+        android:layout_marginBottom="20dp">
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -54,9 +44,23 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/email_id"
+            android:hint="E-mail ID"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp">
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress">
+
+            </com.google.android.material.textfield.TextInputEditText>
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:id="@+id/password"
             android:hint="Password"
-            app:passwordToggleEnabled="true"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp">
@@ -67,30 +71,14 @@
 
             </com.google.android.material.textfield.TextInputEditText>
         </com.google.android.material.textfield.TextInputLayout>
+
         <Button
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:text="forgot password"
-            android:layout_gravity="right"
-            android:background="#00000000"
-            android:textColor="@color/black"
-            android:layout_marginTop="5dp"/>
-        <Button
+            android:id="@+id/registerbtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="sign up"
+            android:textColor="@color/white"
             android:backgroundTint="@color/black"
-            android:text="Login"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
-            />
-        <Button
-            android:id="@+id/registerbtn2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="New user? sign up"
-            android:background="#00000000"
-            android:textColor="@color/black"
-            android:layout_gravity="right"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"/>
     </LinearLayout>
