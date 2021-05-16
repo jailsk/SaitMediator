@@ -22,7 +22,7 @@ public class register_page extends AppCompatActivity {
     EditText mrollno,memail,mpassword1,mpassword2;
     Button mregisterbtn;
     FirebaseAuth fAuth;
-    ProgressBar progressBar;
+    ProgressBar mprogressBar;
 
 
 
@@ -41,7 +41,7 @@ public class register_page extends AppCompatActivity {
         mregisterbtn =  findViewById(R.id.registerbtn);
 
         fAuth = FirebaseAuth.getInstance();
-        //ProgressBar = findViewById(R.id.Progressbar);
+        mprogressBar = findViewById(R.id.progressBar);
 
         if (fAuth.getCurrentUser() != null){
             startActivity(new Intent(getApplicationContext(),MainActivity.class));
@@ -66,7 +66,7 @@ public class register_page extends AppCompatActivity {
                     mpassword1.setError("password more than 6 ch");
                     return;
                 }
-                progressBar.setVisibility(View.VISIBLE);
+                mprogressBar.setVisibility(View.VISIBLE);
 
                 fAuth.createUserWithEmailAndPassword(email, password1).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
