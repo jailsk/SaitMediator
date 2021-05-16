@@ -14,17 +14,24 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.Objects;
+
 
 public class register_page extends AppCompatActivity {
-    EditText mrollno,memail,mpassword1,mpassword2;
-    Button mregisterbtn;
-    FirebaseAuth fAuth;
+  /*  FirebaseAuth fAuth;
+    private FirebaseAuth mAuth;
     ProgressBar progressBar;
-
-
+    private static final String TAG = register_page.class.getSimpleName();
+    private TextInputEditText mrollno;
+    private TextInputEditText memail_id;
+    private TextInputEditText mPassword;
+    private Button mSignup=(Button)findViewById(R.id.registerbtn);
+*/
 
 
 
@@ -33,14 +40,38 @@ public class register_page extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_page);
+      /*  mAuth = FirebaseAuth.getInstance();
 
-        mrollno     = findViewById(R.id.rollno);
-        memail      = findViewById(R.id.email);
-        mpassword1  =  findViewById(R.id.password1);
-        mpassword2  =   findViewById(R.id.password2);
-        mregisterbtn =  findViewById(R.id.registerbtn);
+        mrollno = (TextInputEditText) findViewById(R.id.rollno);
+        memail_id = (TextInputEditText) findViewById(R.id.email_id);
+        mPassword = (TextInputEditText) findViewById(R.id.password);
 
-        fAuth = FirebaseAuth.getInstance();
+
+        mSignup.setOnClickListener(view -> {
+            String rollno = Objects.requireNonNull(mrollno.getText()).toString();
+            String email = Objects.requireNonNull(memail_id.getText()).toString();
+            String password = Objects.requireNonNull(mPassword.getText()).toString();
+
+            registerUser(rollno, email, password);
+
+        });
+    }
+    private void registerUser(String rollno, String email, String password) {
+
+        mAuth.signInWithEmailAndPassword(rollno,password)
+                .addOnCompleteListener(this, task -> {
+                    if(task.isSuccessful()){
+                        Intent mainIntent = new Intent(register_page.this,Dashboard.class);
+                        startActivity(mainIntent);
+                        finish();
+                    }else{
+                        Toast.makeText(register_page.this,"You got some error.",Toast.LENGTH_SHORT).show();
+                    }
+                });*/
+    }
+}
+
+       /* fAuth = FirebaseAuth.getInstance();
         //ProgressBar = findViewById(R.id.Progressbar);
 
         if (fAuth.getCurrentUser() != null){
@@ -48,40 +79,33 @@ public class register_page extends AppCompatActivity {
             finish();
         }
 
-        mregisterbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String email = memail.getText().toString().trim();
-                String password1 = mpassword1.getText().toString().trim();
+        mregisterbtn.setOnClickListener(v -> {
+            String email = memail.getText().toString().trim();
+            String password1 = mpassword1.getText().toString().trim();
 
-                if (TextUtils.isEmpty(email)) {
-                    memail.setError("Email required");
-                    return;
-                }
-                if (TextUtils.isEmpty(password1)) {
-                    memail.setError("password required");
-                    return;
-                }
-                if (password1.length() < 6) {
-                    mpassword1.setError("password more than 6 ch");
-                    return;
-                }
-                progressBar.setVisibility(View.VISIBLE);
-
-                fAuth.createUserWithEmailAndPassword(email, password1).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            Toast.makeText(register_page.this, "user created.", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                        } else {
-                            Toast.makeText(register_page.this, "error !" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    }
-
-                });
+            if (TextUtils.isEmpty(email)) {
+                memail.setError("Email required");
+                return;
             }
+            if (TextUtils.isEmpty(password1)) {
+                memail.setError("password required");
+                return;
+            }
+            if (password1.length() < 6) {
+                mpassword1.setError("password more than 6 ch");
+                return;
+            }
+            progressBar.setVisibility(View.VISIBLE);
+
+            fAuth.createUserWithEmailAndPassword(email, password1).addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    Toast.makeText(register_page.this, "user created.", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                } else {
+                    Toast.makeText(register_page.this, "error !" + Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
         });
-    }
-}
+      */
+
 

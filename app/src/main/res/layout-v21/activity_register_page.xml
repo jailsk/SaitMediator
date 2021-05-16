@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".register_page"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="20dp">
     <ImageView
         android:layout_width="150dp"
         android:layout_height="150dp"
@@ -15,7 +16,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:text="@string/new_user_sign_up"
+        android:text="New user? signup here."
         android:textColor="@color/black"
         android:textSize="25sp"
         android:textStyle="bold"
@@ -30,7 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/rollno"
-            android:hint="@string/roll_number"
+            android:hint="Roll Number"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp">
@@ -44,7 +45,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/email_id"
-            android:hint="@string/e_mail_id"
+            android:hint="E-mail ID"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp">
@@ -58,8 +59,8 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/password1"
-            android:hint="@string/password"
+            android:id="@+id/password"
+            android:hint="Password"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp">
@@ -70,26 +71,12 @@
 
             </com.google.android.material.textfield.TextInputEditText>
         </com.google.android.material.textfield.TextInputLayout>
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/password2"
-            android:hint="@string/re_type_password"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp">
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textPassword">
 
-            </com.google.android.material.textfield.TextInputEditText>
-        </com.google.android.material.textfield.TextInputLayout>
         <Button
             android:id="@+id/registerbtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/sign_up"
+            android:text="sign up"
             android:textColor="@color/white"
             android:backgroundTint="@color/black"
             android:layout_marginTop="5dp"

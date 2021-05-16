@@ -2,4 +2,14 @@
     <string name="app_name">SaitMediator</string>
     <string name="splash_logo">splash logo</string>
     <string name="sait_official">SAIT official</string>
+    <string name="welcome_to_mediator">Welcome to Mediator</string>
+    <string name="sign_in_to_continue">Sign in to continue</string>
+    <string name="roll_number">Roll Number</string>
+    <string name="password">Password</string>
+    <string name="forgot_password">forgot password</string>
+    <string name="login">Login</string>
+    <string name="new_user_sign_up">New user? sign up</string>
+    <string name="e_mail_id">E-mail ID</string>
+    <string name="re_type_password">Re-type password</string>
+    <string name="sign_up">sign up</string>
 </resources>
