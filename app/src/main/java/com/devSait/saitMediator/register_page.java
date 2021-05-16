@@ -17,7 +17,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-import org.w3c.dom.Text;
 
 public class register_page extends AppCompatActivity {
     EditText mrollno,memail,mpassword1,mpassword2;
@@ -42,47 +41,47 @@ public class register_page extends AppCompatActivity {
         mregisterbtn =  findViewById(R.id.registerbtn);
 
         fAuth = FirebaseAuth.getInstance();
-        ProgressBar = findViewById(R.id.progressBar);
+        //ProgressBar = findViewById(R.id.Progressbar);
 
         if (fAuth.getCurrentUser() != null){
             startActivity(new Intent(getApplicationContext(),MainActivity.class));
             finish();
         }
 
-        mregisterbtn.setOnClickListener(new View.OnClickListener()){
+        mregisterbtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
+            public void onClick(View v) {
                 String email = memail.getText().toString().trim();
                 String password1 = mpassword1.getText().toString().trim();
 
-                if(TextUtils.isEmpty(email)){
+                if (TextUtils.isEmpty(email)) {
                     memail.setError("Email required");
                     return;
                 }
-                if(TextUtils.isEmpty(password1)){
+                if (TextUtils.isEmpty(password1)) {
                     memail.setError("password required");
                     return;
-            }
-                if (password1.length()<6){
+                }
+                if (password1.length() < 6) {
                     mpassword1.setError("password more than 6 ch");
                     return;
                 }
                 progressBar.setVisibility(View.VISIBLE);
 
-                fAuth.createUserWithEmailAndPassword(email,password1).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                fAuth.createUserWithEmailAndPassword(email, password1).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
-                    public void onComplete(@NonNull @org.jetbrains.annotations.NotNull Task<AuthResult> task) {
-                        if(task.isSuccessful()){
-                            Toast.makeText(Register.this,"user created.",Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(getApplicationContext(),MainActivity.class));
-                        }else {
-                            Toast.makeText(Register.this,"error !" + task.getException().getMessage(),Toast.LENGTH_SHORT).show();
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(register_page.this, "user created.", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                        } else {
+                            Toast.makeText(register_page.this, "error !" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     }
 
-                                                                                                }
-                                                                                            }
-                )
-        }
+                });
+            }
+        });
     }
 }
+
