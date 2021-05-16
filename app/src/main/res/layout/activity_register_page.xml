@@ -4,17 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".login_page">
+    tools:context=".register_page">
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Login"
+        android:text="Register"
         android:textColor="@color/black"
         android:textSize="48sp"
         android:textStyle="bold"
-        tools:layout_editor_absoluteX="145dp"
+        tools:layout_editor_absoluteX="115dp"
         tools:layout_editor_absoluteY="16dp" />
 
     <EditText
@@ -37,7 +37,7 @@
         android:inputType="textPassword"
         android:textColorHint="@color/black"
         tools:layout_editor_absoluteX="100dp"
-        tools:layout_editor_absoluteY="175dp" />
+        tools:layout_editor_absoluteY="279dp" />
 
     <Button
         android:id="@+id/registerbtn"
@@ -46,5 +46,28 @@
         android:text="Button"
         android:textSize="24sp"
         tools:layout_editor_absoluteX="136dp"
-        tools:layout_editor_absoluteY="275dp" />
+        tools:layout_editor_absoluteY="413dp" />
+
+    <EditText
+        android:id="@+id/password2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:textColorHint="@color/black"
+        tools:layout_editor_absoluteX="100dp"
+        tools:layout_editor_absoluteY="345dp" />
+
+    <EditText
+        android:id="@+id/email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
+        android:textColorHint="@color/black"
+        tools:layout_editor_absoluteX="100dp"
+        tools:layout_editor_absoluteY="186dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
