@@ -1,16 +1,21 @@
 package com.devSait.saitMediator;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.util.Pair;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -30,6 +35,8 @@ import java.util.Objects;
 
 public class register_page extends AppCompatActivity {
     public static final String TAG = "TAG";
+    ImageView image;
+    TextView heading,subt;
     TextInputLayout mrollno,mEmail,mPassword,mPhone;
     Button mRegisterBtn;
     TextView mLoginBtn;
@@ -43,6 +50,9 @@ public class register_page extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_page);
 
+        image = findViewById(R.id.imageView);
+        heading = findViewById(R.id.textView);
+        subt = findViewById(R.id.subtextview);
         mrollno   = findViewById(R.id.rollno);
         mEmail      = findViewById(R.id.email);
         mPassword   = findViewById(R.id.password);
@@ -106,7 +116,7 @@ public class register_page extends AppCompatActivity {
                         });
 
                         Toast.makeText(register_page.this, "User Created.", Toast.LENGTH_SHORT).show();
-                        userID = rollnum;
+                        userID = fAuth.getCurrentUser().getUid();
                         DocumentReference documentReference = fStore.collection("users").document(userID);
                         Map<String,Object> user = new HashMap<>();
                         user.put("rollno",rollnum);
@@ -123,7 +133,7 @@ public class register_page extends AppCompatActivity {
                                 Log.d(TAG, "onFailure: " + e.toString());
                             }
                         });
-                        startActivity(new Intent(getApplicationContext(),Dashboard.class));
+                        startActivity(new Intent(getApplicationContext(),login_page.class));
 
                     }else {
                         Toast.makeText(register_page.this, "Error ! " + Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
@@ -136,8 +146,19 @@ public class register_page extends AppCompatActivity {
 
 
         mLoginBtn.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onClick(View v) {
+                Pair[] pairs=new Pair[7];
+                pairs[0]= new Pair<View,String>(image,"logo_image");
+                pairs[1]= new Pair<View,String>(heading,"text");
+                pairs[2]= new Pair<View,String>(subt,"text_des");
+                pairs[3]= new Pair<View,String>(mrollno,"roll_no");
+                pairs[4]= new Pair<View,String>(mPassword,"psword");
+                pairs[5]= new Pair<View,String>(mLoginBtn,"login_btn");
+                pairs[6]= new Pair<View,String>(mRegisterBtn,"signup_btn");
+
+                ActivityOptions options=ActivityOptions.makeSceneTransitionAnimation(register_page.this,pairs);
                 startActivity(new Intent(getApplicationContext(),login_page.class));
             }
         });

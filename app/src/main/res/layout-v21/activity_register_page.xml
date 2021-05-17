@@ -28,6 +28,7 @@
         android:fontFamily="@font/montserrat_subrayada"
         android:transitionName="text"/>
     <TextView
+        android:id="@+id/subtextview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="First time? Fill up the following details"

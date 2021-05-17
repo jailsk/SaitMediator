@@ -76,6 +76,7 @@
             </com.google.android.material.textfield.TextInputEditText>
         </com.google.android.material.textfield.TextInputLayout>
         <Button
+            android:id="@+id/forget_pwsd"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:text="@string/forgot_password"
@@ -105,6 +106,12 @@
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"/>
     </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/progressBar3"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 
 </LinearLayout>
