@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "740851633744-anlg9i4487c1d49q9vjd0k72pkih3kf5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.devSait.saitMediator",
+            "certificate_hash": "fbe7b6864fd7f4a1c30ea3265250fef8504118d5"
+          }
+        },
+        {
           "client_id": "740851633744-517iaq2pvclmm1iq3hdhoeu38ra98r86.apps.googleusercontent.com",
           "client_type": 3
         }
