@@ -12,4 +12,14 @@
     <string name="e_mail_id">E-mail ID</string>
     <string name="re_type_password">Re-type password</string>
     <string name="sign_up">sign up</string>
+    <string name="title_activity_main2">test</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="title_activity_test1">test1</string>
 </resources>

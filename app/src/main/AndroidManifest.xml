@@ -11,8 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SaitMediator">
-        <activity android:name=".Dashboard"></activity>
-        <activity android:name=".register_page" />
+        <activity android:name=".register_page"></activity>
+        <activity android:name=".Dashboard" />
         <activity android:name=".login_page" />
         <activity android:name=".MainActivity">
             <intent-filter>
