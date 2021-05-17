@@ -157,9 +157,10 @@ public class register_page extends AppCompatActivity {
                 pairs[4]= new Pair<View,String>(mPassword,"psword");
                 pairs[5]= new Pair<View,String>(mLoginBtn,"login_btn");
                 pairs[6]= new Pair<View,String>(mRegisterBtn,"signup_btn");
+                Intent i=new Intent(getApplicationContext(),login_page.class);
 
-                ActivityOptions options=ActivityOptions.makeSceneTransitionAnimation(register_page.this,pairs);
-                startActivity(new Intent(getApplicationContext(),login_page.class));
+                ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(register_page.this, pairs);
+                startActivity(i,options.toBundle());
             }
         });
 

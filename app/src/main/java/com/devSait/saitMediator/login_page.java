@@ -136,6 +136,7 @@ public class login_page extends AppCompatActivity {
                     Toast.makeText(login_page.this, "User not registered or roll no. or password is wrong.", Toast.LENGTH_SHORT).show();
                 }
                 progressBar.setVisibility(View.GONE);
+                Toast.makeText(login_page.this, "User not registered", Toast.LENGTH_SHORT).show();
             });
 
 
