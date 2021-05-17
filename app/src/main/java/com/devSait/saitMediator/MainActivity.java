@@ -16,6 +16,8 @@ import android.widget.TextView;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class MainActivity extends AppCompatActivity {
 
     private static final int SPLASH_SCREEN = 3550;
@@ -53,4 +55,10 @@ public class MainActivity extends AppCompatActivity {
 
     },SPLASH_SCREEN);
     }
+    public void logout(View view) {
+        FirebaseAuth.getInstance().signOut();
+        startActivity(new Intent(getApplicationContext(),login_page.class));
+        finish();
+    }
+
 }
