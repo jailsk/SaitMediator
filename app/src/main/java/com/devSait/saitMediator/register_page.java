@@ -30,7 +30,7 @@ import java.util.Objects;
 
 public class register_page extends AppCompatActivity {
     public static final String TAG = "TAG";
-    TextInputLayout mrollno,mEmail,mPassword1,mPassword2;
+    TextInputLayout mrollno,mEmail,mPassword,mPhone;
     Button mRegisterBtn;
     TextView mLoginBtn;
     FirebaseAuth fAuth;
@@ -45,8 +45,8 @@ public class register_page extends AppCompatActivity {
 
         mrollno   = findViewById(R.id.rollno);
         mEmail      = findViewById(R.id.email);
-        mPassword1   = findViewById(R.id.password1);
-        mPassword2      = findViewById(R.id.password2);
+        mPassword   = findViewById(R.id.password);
+        mPhone      = findViewById(R.id.phone_no);
         mRegisterBtn= findViewById(R.id.registerbtn);
         mLoginBtn   = findViewById(R.id.loginbtn);
 
@@ -55,41 +55,29 @@ public class register_page extends AppCompatActivity {
         progressBar = findViewById(R.id.progressBar);
 
         if(fAuth.getCurrentUser() != null){
-            startActivity(new Intent(getApplicationContext(),MainActivity.class));
+            startActivity(new Intent(getApplicationContext(),Dashboard.class));
             finish();
         }
-        mLoginBtn.setOnClickListener(v -> {
-            Intent i=new Intent(getApplicationContext(),login_page.class);
-            startActivity(i);
-        });
 
-
+        progressBar.setVisibility(View.GONE);
         mRegisterBtn.setOnClickListener(v -> {
             final String email = Objects.requireNonNull(mEmail.getEditText()).getText().toString().trim();
-            String password1 = Objects.requireNonNull(mPassword1.getEditText()).getText().toString().trim();
+            String password = Objects.requireNonNull(mPassword.getEditText()).getText().toString().trim();
             final String rollnum = Objects.requireNonNull(mrollno.getEditText()).getText().toString();
-            final String password2    = Objects.requireNonNull(mPassword2.getEditText()).getText().toString();
+            final String phone    = Objects.requireNonNull(mPhone.getEditText()).getText().toString();
 
             if(TextUtils.isEmpty(email)){
                 mEmail.setError("Email is Required.");
                 return;
             }
 
-            if(TextUtils.isEmpty(password1)){
-                mPassword1.setError("Password is Required.");
-                return;
-            }
-            if(TextUtils.isEmpty(password2)){
-                mPassword2.setError("Please retype your password.");
-                return;
-            }
-            if(password1.equals(password2)){
-                mPassword2.setError("Password is not same.");
+            if(TextUtils.isEmpty(password)){
+                mPassword.setError("Password is Required.");
                 return;
             }
 
-            if(password1.length() < 6){
-                mPassword1.setError("Password Must be >= 6 Characters");
+            if(password.length() < 6){
+                mPassword.setError("Password Must be >= 6 Characters");
                 return;
             }
 
@@ -97,7 +85,7 @@ public class register_page extends AppCompatActivity {
 
             // register the user in firebase
 
-            fAuth.createUserWithEmailAndPassword(email,password1).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            fAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if(task.isSuccessful()){
@@ -118,11 +106,12 @@ public class register_page extends AppCompatActivity {
                         });
 
                         Toast.makeText(register_page.this, "User Created.", Toast.LENGTH_SHORT).show();
-                        userID = fAuth.getCurrentUser().getUid();
+                        userID = rollnum;
                         DocumentReference documentReference = fStore.collection("users").document(userID);
                         Map<String,Object> user = new HashMap<>();
                         user.put("rollno",rollnum);
                         user.put("email",email);
+                        user.put("Phone no",phone);
                         documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
@@ -134,7 +123,7 @@ public class register_page extends AppCompatActivity {
                                 Log.d(TAG, "onFailure: " + e.toString());
                             }
                         });
-                        startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                        startActivity(new Intent(getApplicationContext(),Dashboard.class));
 
                     }else {
                         Toast.makeText(register_page.this, "Error ! " + Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
@@ -149,7 +138,7 @@ public class register_page extends AppCompatActivity {
         mLoginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),Dashboard.class));
+                startActivity(new Intent(getApplicationContext(),login_page.class));
             }
         });
 

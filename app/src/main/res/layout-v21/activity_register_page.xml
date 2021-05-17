@@ -3,15 +3,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".register_page"
     android:orientation="vertical"
     android:padding="20dp">
+
     <ImageView
+        android:id="@+id/imageView"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:src="@mipmap/ic_launcher"
         android:contentDescription="@string/splash_logo"
-        />
+        android:src="@mipmap/ic_launcher"
+        android:transitionName="logo_image"/>
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
@@ -21,7 +25,14 @@
         android:textColor="@color/black"
         android:textSize="25sp"
         android:textStyle="bold"
-        android:fontFamily="@font/montserrat_subrayada" />
+        android:fontFamily="@font/montserrat_subrayada"
+        android:transitionName="text"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="First time? Fill up the following details"
+        android:textSize="15sp"
+        android:transitionName="text_des"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -32,8 +43,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Roll Number"
+            app:counterEnabled="true"
+            app:counterMaxLength="12"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_marginTop="5dp"
+            android:transitionName="roll_no"
             android:layout_marginBottom="5dp"
             android:id="@+id/rollno">
             <com.google.android.material.textfield.TextInputEditText
@@ -61,26 +75,28 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/password"
+            android:hint="Phone no."
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
-            android:id="@+id/password1">
+            android:id="@+id/phone_no">
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPassword">
+                android:inputType="phone">
 
             </com.google.android.material.textfield.TextInputEditText>
         </com.google.android.material.textfield.TextInputLayout>
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Re-type password"
+            android:hint="@string/password"
+            android:transitionName="psword"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
-            android:id="@+id/password2">
+            app:passwordToggleEnabled="true"
+            android:id="@+id/password">
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -94,6 +110,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="sign up"
+            android:transitionName="login_btn"
             android:textColor="@color/white"
             android:backgroundTint="@color/black"
             android:layout_marginTop="5dp"
@@ -102,12 +119,19 @@
             android:id="@+id/loginbtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Already a user? sign in here"
+            android:text="Already have an account."
             android:textColor="@color/black"
             android:backgroundTint="#00000000"
             android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"/>
+            android:layout_marginBottom="5dp"
+            android:transitionName="signup_btn"/>
     </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 
 </LinearLayout>

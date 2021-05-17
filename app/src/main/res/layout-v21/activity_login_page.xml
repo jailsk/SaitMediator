@@ -31,9 +31,11 @@
         android:textStyle="bold"
         android:textColor="@color/black"/>
     <TextView
+        android:id="@+id/sub_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/sign_in_to_continue"
+        android:transitionName="text_des"
         android:textSize="15sp"/>
     <LinearLayout
         android:layout_width="match_parent"
@@ -46,6 +48,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/rollno"
             android:hint="@string/roll_number"
+            android:transitionName="roll_no"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp">
@@ -60,6 +63,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/password"
             android:hint="@string/password"
+            android:transitionName="psword"
             app:passwordToggleEnabled="true"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_marginTop="5dp"
@@ -80,15 +84,18 @@
             android:textColor="@color/black"
             android:layout_marginTop="5dp"/>
         <Button
+            android:id="@+id/loginbtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/black"
             android:text="@string/login"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
+            android:transitionName="login_btn"
             />
         <Button
             android:id="@+id/registerbtn2"
+            android:transitionName="signup_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/new_user_sign_up"
