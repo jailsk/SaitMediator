@@ -71,8 +71,8 @@ public class login_page extends AppCompatActivity {
         fAuth = FirebaseAuth.getInstance();
         fstore = FirebaseFirestore.getInstance();
 
-        if(fAuth.getCurrentUser() != null){
-            startActivity(new Intent(getApplicationContext(),Dashboard.class));
+        if (fAuth.getCurrentUser() != null && fAuth.getCurrentUser().isEmailVerified()) {
+            startActivity(new Intent(getApplicationContext(), Dashboard.class));
             finish();
         }
 
@@ -93,9 +93,8 @@ public class login_page extends AppCompatActivity {
         });
 
         login.setOnClickListener(v -> {
-            String rollnum = Objects.requireNonNull(rollno.getEditText()).getText().toString().trim();
+            String rollnum = Objects.requireNonNull(rollno.getEditText()).getText().toString().trim().toUpperCase();
             String pswd = Objects.requireNonNull(password.getEditText()).getText().toString().trim();
-            String email;
             if (TextUtils.isEmpty(rollnum)) {
                 rollno.setError("Roll no is Required.");
                 return;
@@ -118,25 +117,33 @@ public class login_page extends AppCompatActivity {
             query.get().addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
-                        // authenticate the user
-                        fAuth.signInWithEmailAndPassword(document.getString("email"), pswd).addOnCompleteListener(t -> {
-                            if (t.isSuccessful()) {
-                                Toast.makeText(login_page.this, "Logged in Successfully", Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(getApplicationContext(), Dashboard.class));
-                            } else {
-                                Toast.makeText(login_page.this, "Error ! " + t.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                                progressBar.setVisibility(View.GONE);
-                            }
+                        if (document.exists()) {
+                            String email = document.getString("email");
+                            // authenticate the user
+                            fAuth.signInWithEmailAndPassword(email, pswd).addOnCompleteListener(t -> {
+                                if (t.isSuccessful()) {
+                                    if(fAuth.getCurrentUser().isEmailVerified()) {
+                                        Toast.makeText(login_page.this, "Logged in Successfully", Toast.LENGTH_SHORT).show();
+                                        startActivity(new Intent(getApplicationContext(), Dashboard.class));
+                                    }else{
+                                        progressBar.setVisibility(View.GONE);
+                                        Toast.makeText(login_page.this, "Please verify you email.", Toast.LENGTH_SHORT).show();
+                                    }
+                                } else {
+                                    Toast.makeText(login_page.this, "Error ! " + t.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                    progressBar.setVisibility(View.GONE);
+                                }
 
-                        });
+                            });
+                        }
+                        else {
+                            progressBar.setVisibility(View.GONE);
+                        }
                     }
-                }
-                else {
+                } if (task.getResult().size() == 0) {
                     progressBar.setVisibility(View.GONE);
-                    Toast.makeText(login_page.this, "User not registered or roll no. or password is wrong.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(login_page.this, "User not registered.", Toast.LENGTH_SHORT).show();
                 }
-                progressBar.setVisibility(View.GONE);
-                Toast.makeText(login_page.this, "User not registered", Toast.LENGTH_SHORT).show();
             });
 
 
