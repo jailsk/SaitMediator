@@ -64,16 +64,20 @@ public class register_page extends AppCompatActivity {
         fStore = FirebaseFirestore.getInstance();
         progressBar = findViewById(R.id.progressBar);
 
-        if(fAuth.getCurrentUser() != null){
-            startActivity(new Intent(getApplicationContext(),Dashboard.class));
-            finish();
+        if(fAuth.getCurrentUser() != null) {
+            if (fAuth.getCurrentUser().isEmailVerified()) {
+                startActivity(new Intent(getApplicationContext(), Dashboard.class));
+                finish();
+            }else{
+                Toast.makeText(register_page.this, "Verify your email.", Toast.LENGTH_SHORT).show();
+            }
         }
 
         progressBar.setVisibility(View.GONE);
         mRegisterBtn.setOnClickListener(v -> {
             final String email = Objects.requireNonNull(mEmail.getEditText()).getText().toString().trim();
             String password = Objects.requireNonNull(mPassword.getEditText()).getText().toString().trim();
-            final String rollnum = Objects.requireNonNull(mrollno.getEditText()).getText().toString();
+            final String rollnum = Objects.requireNonNull(mrollno.getEditText()).getText().toString().toUpperCase();
             final String phone    = Objects.requireNonNull(mPhone.getEditText()).getText().toString();
 
             if(TextUtils.isEmpty(email)){

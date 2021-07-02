@@ -4,10 +4,10 @@ import android.app.ActivityOptions;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.nfc.Tag;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.util.Pair;
 import android.view.View;
 import android.view.WindowManager;
@@ -22,25 +22,18 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.Objects;
 
 public class login_page extends AppCompatActivity {
-    private static final String TAG = "login_page";
     ImageView image;
     TextView heading, subtitle;
     TextInputLayout rollno, password;
@@ -48,7 +41,6 @@ public class login_page extends AppCompatActivity {
     ProgressBar progressBar;
     FirebaseAuth fAuth;
     FirebaseFirestore fstore;
-
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,9 +63,14 @@ public class login_page extends AppCompatActivity {
         fAuth = FirebaseAuth.getInstance();
         fstore = FirebaseFirestore.getInstance();
 
-        if(fAuth.getCurrentUser() != null){
-            startActivity(new Intent(getApplicationContext(),Dashboard.class));
-            finish();
+        if(fAuth.getCurrentUser() != null) {
+            if (fAuth.getCurrentUser().isEmailVerified()) {
+                startActivity(new Intent(getApplicationContext(), Dashboard.class));
+                finish();
+            }
+            else{
+                Toast.makeText(login_page.this, "Email is not verified.", Toast.LENGTH_SHORT).show();
+            }
         }
 
         signup.setOnClickListener(v -> {
@@ -93,9 +90,9 @@ public class login_page extends AppCompatActivity {
         });
 
         login.setOnClickListener(v -> {
-            String rollnum = Objects.requireNonNull(rollno.getEditText()).getText().toString().trim();
+            progressBar.setVisibility(View.VISIBLE);
+            String rollnum = Objects.requireNonNull(rollno.getEditText()).getText().toString().toUpperCase().trim();
             String pswd = Objects.requireNonNull(password.getEditText()).getText().toString().trim();
-            String email;
             if (TextUtils.isEmpty(rollnum)) {
                 rollno.setError("Roll no is Required.");
                 return;
@@ -110,8 +107,6 @@ public class login_page extends AppCompatActivity {
                 password.setError("Password Must be >= 6 Characters");
                 return;
             }
-
-            progressBar.setVisibility(View.VISIBLE);
             //Retrieving email
             CollectionReference yourCollRef = fstore.collection("users");
             Query query = yourCollRef.whereEqualTo("rollno", rollnum);
@@ -121,25 +116,22 @@ public class login_page extends AppCompatActivity {
                         // authenticate the user
                         fAuth.signInWithEmailAndPassword(document.getString("email"), pswd).addOnCompleteListener(t -> {
                             if (t.isSuccessful()) {
-                                Toast.makeText(login_page.this, "Logged in Successfully", Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(getApplicationContext(), Dashboard.class));
+                                if (fAuth.getCurrentUser().isEmailVerified()) {
+                                    Toast.makeText(login_page.this, "Logged in Successfully", Toast.LENGTH_SHORT).show();
+                                    startActivity(new Intent(getApplicationContext(), Dashboard.class));
+                                } else {
+                                    Toast.makeText(login_page.this, "Please verify your email.", Toast.LENGTH_SHORT).show();
+                                }
                             } else {
                                 Toast.makeText(login_page.this, "Error ! " + t.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                                progressBar.setVisibility(View.GONE);
                             }
-
                         });
                     }
-                }
-                else {
-                    progressBar.setVisibility(View.GONE);
-                    Toast.makeText(login_page.this, "User not registered or roll no. or password is wrong.", Toast.LENGTH_SHORT).show();
+                } if(task.getResult().getDocuments().isEmpty()){
+                    Toast.makeText(login_page.this, "User doesn't exist.", Toast.LENGTH_SHORT).show();
                 }
                 progressBar.setVisibility(View.GONE);
-                Toast.makeText(login_page.this, "User not registered", Toast.LENGTH_SHORT).show();
             });
-
-
         });
 
 
