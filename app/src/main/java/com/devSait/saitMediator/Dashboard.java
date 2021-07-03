@@ -3,6 +3,7 @@ package com.devSait.saitMediator;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -30,6 +31,7 @@ public class Dashboard extends AppCompatActivity {
     FirebaseFirestore fstore = FirebaseFirestore.getInstance();
     FirebaseAuth fAuth = FirebaseAuth.getInstance();
     MyAdapter myAdapter;
+    Button marks,attendance;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +44,8 @@ public class Dashboard extends AppCompatActivity {
         rollno = findViewById(R.id.prollno);
         branch = findViewById(R.id.pbranch);
         sem = findViewById(R.id.psem);
+        marks = findViewById(R.id.marks);
+        attendance=findViewById(R.id.attendance);
 
         FirebaseUser user = fAuth.getCurrentUser();
         String currentID = user.getUid();
@@ -65,7 +69,12 @@ public class Dashboard extends AppCompatActivity {
                         }
                     }
                 });
-
+                marks.setOnClickListener(v ->{
+                   startActivity(new Intent(getApplicationContext(),Marksheet.class));
+                });
+                attendance.setOnClickListener(v -> {
+                    startActivity(new Intent(getApplicationContext(),Attendance.class));
+                });
         }
             public void setUpRecycleView(){
             Query query= fstore.collection("Announcement");

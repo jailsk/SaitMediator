@@ -15,7 +15,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class MyAdapter extends FirestoreRecyclerAdapter<Dynamic_lists, MyAdapter.AnnouncementHolder> {
 
-    public MyAdapter(@NonNull @NotNull FirestoreRecyclerOptions<Dynamic_lists> options) {
+    public MyAdapter(@NonNull FirestoreRecyclerOptions<Dynamic_lists> options) {
         super(options);
     }
 
