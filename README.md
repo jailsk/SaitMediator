@@ -1,5 +1,5 @@
 # SaitMediator android app
-Final Year Project by SRBaxla.
+Final Year Project by SRBaxla and Jailsk.
 
 About the Project:-
 
